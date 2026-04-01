@@ -13,7 +13,13 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
       - ./seeder.sql:/docker-entrypoint-initdb.d/02-seeder.sql:ro
 
-  lang:
+  d:
+    image: dlanguage/dmd:latest
+    container_name: legacy_d
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["dmd", "legacy.d"]
 
 volumes:
   postgres_data:
